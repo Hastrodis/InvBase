@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.mainst, name='main'),
-    url(r'^spis/', views.spisfil, name='spisfil'),
+    url(r'^spis/$', views.spisfil, name='spisfil'),
+    
 ]

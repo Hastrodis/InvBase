@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SaveBase',
+    'InvAPI',
+    'django_elasticsearch_dsl',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +70,19 @@ TEMPLATES = [
         },
     },
 ]
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
+
+ELASTICSEARCH_DSL_AUTO_REFRESH = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 WSGI_APPLICATION = 'InvBase.wsgi.application'
 
@@ -104,6 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_PROFILE_MODULE = 'SaveBase.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

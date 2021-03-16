@@ -23,28 +23,52 @@
 }
 #pod{
     border: 1px solid black;
-    width: 12%;
+    width: 17%;
     height: 80%;
     position: absolute;
-    top: 11%;
-    left: 3%;
+    top: 13%;
+    left: 4%;
 
 }
 #spis{
     border: 1px solid black;
-    width: 12%;
+    width: 17%;
     height: 80%;
     position: absolute;
-    top: 11%;
-    left: 18%;
+    top: 13%;
+    left: 25%;
 }
 #korp{
     border: 1px solid black;
-    width: 12%;
+    width: 17%;
     height: 80%;
     position: absolute;
-    top: 11%;
-    left: 33%;
+    top: 13%;
+    left: 46%;
+}
+#search{
+    
+    width: 29%;
+    height: 80%;
+    position: absolute;
+    top: 13%;
+    left: 67%;
+}
+#srrez{
+    border: 1px solid black;
+    width: 17%;
+    height: 100%;
+    position: absolute;
+    top: 10%;
+    left: 0%;
+}
+#srrezin{
+    border: 1px solid black;
+    width: 82.7%;
+    height: 100%;
+    position: absolute;
+    top: 10%;
+    left: 17%;
 }
 #sp{
     position: relative;

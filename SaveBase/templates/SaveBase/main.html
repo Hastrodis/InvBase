@@ -4,21 +4,25 @@
     {% if user.is_authenticated %}
         <head>      
             <title>Главная</title>   
-            <link rel="stylesheet" href="{% static "css/main.css" %}" />    
+            <link rel="stylesheet" href="{% static "css/main.css" %}" />
+            <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" />      
         </head>
         <body>
+
+            <nav class="navbar navbar-dark bg-primary">
+                <span class="navbar-text">
+                    Вы авторизовались как: <b>{{ user.get_username }}</b>
+                </span>
+            </nav>
+            
             <div class="parent">
-                <div id="header">
-                    <div id="header1">
-                        <p align="right">Вы авторизовались как: <b>{{ user.get_username }}</b>
-                        <br><a href="/logout">Выход</a></p>                         
-                    </div>
-                </div>
                 {% if po.count > 0 %}
                 <div id="pod">
                     <p align="center">Подотченые лица</p>
                     {% for p in po %}
-                    <p id="sp"><a href="spis/{{ p.IDSotrud}}"> {{ p.IDSotrud__username }}</a></p>
+                        {% if p.profile.is_podot == True %}
+                            <p id="sp"><a href="spis/{{ p.username }}"> {{ p.username }}</a></p>
+                        {% endif %}
                     {% endfor %}                
                 </div>
                 {% endif %}
@@ -26,7 +30,7 @@
                 <div id="spis">
                     <p align="center">Перечень типов техники</p>
                     {% for t in ty %}
-                    <p id="sp"><a href="spis/{{ t.ID }}"> {{ t.TypeTech }}</a></p>
+                    <p id="sp"><a href="spis/?type={{ t.TypeTech }}"> {{ t.TypeTech }}</a></p>
                     {% endfor %}                
                 </div>
                 {% endif %}
@@ -38,11 +42,20 @@
                     {% endfor %}                
                 </div>
                 {% endif %}
+                <div id="search">
+                <form method="GET" action="/main/spis/">                  
+                    <p><input name="q" type="txt" size="30" placeholder="Введите поисковой запроса"> </p>
+                    <p><input type="submit" value="Поиск"></p>
+                </form>
+                <p></p><a href="/main/spis/">Показать весь список</a></p>
+                <p></p><a href="">Добавить технику к списку</a></p>
+                </div>
             </div>
         </body>
     {% else %}
         <head>
             <meta http-equiv="refresh" content="0; url=/">
+            
         </head>
     {% endif %}
 </html> 

@@ -1,5 +1,13 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+class Profile(models.Model): #расширение пользователя
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_podot = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.user)
 
 class Type(models.Model):
     TypeTech = models.CharField(max_length=100)
@@ -23,7 +31,7 @@ class Korpus(models.Model):
         verbose_name_plural = 'Номера корпусов'
 
 class Kabinet(models.Model):
-    IDSotrud = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    IDSotrud = models.ForeignKey(User, on_delete=models.CASCADE)
     IDKorpus = models.ForeignKey(Korpus, on_delete=models.CASCADE)
     NomerKab = models.CharField(max_length=10)
 
@@ -37,11 +45,12 @@ class Kabinet(models.Model):
 class Techn(models.Model):
     IDKabinet = models.ForeignKey(Kabinet, on_delete=models.CASCADE)
     IDType = models.ForeignKey(Type, on_delete=models.CASCADE)
+    IDUser = models.ForeignKey(User, on_delete=models.CASCADE)
     InvNomer = models.CharField(max_length=50)
     Naimen = models.CharField(max_length=100)
     DataProverki = models.DateField(verbose_name='Дата проверки')
     AktSpis = models.CharField(max_length=30, blank=True),
-    DataUtil = models.DateField(verbose_name='Дата утилизации', blank=True)
+    DataUtil = models.DateField(verbose_name='Дата утилизации', blank=True, null=True), 
     Prim = models.TextField(verbose_name='Примечание', blank=True, null=True)
 
     def __str__(self):
@@ -54,7 +63,7 @@ class Techn(models.Model):
 class History(models.Model):
     IDTech = models.ForeignKey(Techn, on_delete=models.CASCADE)
     IDKab = models.ForeignKey(Kabinet, on_delete=models.CASCADE)
-    IDSotrud = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    FIOPod = models.CharField(max_length=150, verbose_name='Подотчетное лицо')
     DataPerem = models.DateField(verbose_name='Дата перемещения')
     AktPerem = models.CharField(max_length=30, blank=True)
     
@@ -64,3 +73,12 @@ class History(models.Model):
     class Meta:
         verbose_name = 'История'
         verbose_name_plural = 'История'
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

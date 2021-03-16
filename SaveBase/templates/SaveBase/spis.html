@@ -3,8 +3,27 @@
 <html>
     {% if user.is_authenticated %}
         <head>      
-            <title>Список техники</title>   
+            <title>Список техники</title> 
+            <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" />  
         </head>
-        <body></body>
+        <body>
+            <div class="parent">
+                <div id="header">
+                    <div id="header1">
+                        <p align="right">Вы авторизовались как: <b>{{ user.get_username }}</b>
+                        <br><a href="/main">Вернуться</a>/<a href="/logout">Выход</a></p> 
+                                              
+                    </div>
+                </div>
+                <div id="srrez">
+                    {% for q in qs %}
+                    <p id="sp"><a href="spis/{{ q.InvNomer }}"> {{ q.InvNomer }}</a></p>
+                    {% endfor %}  
+                </div>
+                <div id="srrezin">
+
+                </div>
+            </div>
+        </body>
     {% endif %}
 </html>

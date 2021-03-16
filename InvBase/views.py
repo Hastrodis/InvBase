@@ -13,13 +13,6 @@ class LoginFormView(FormView):
     template_name = "index.html"
     success_url = "/main/"
 
-    def is_group(user, group_name):
-        try:
-            group =  Group.objects.get(name=group_name)
-            return group in user.groups.all()
-        except Group.DoesNotExist:
-            return False
-
     def form_valid(self, form):
         self.user = form.get_user()
         login(self.request, self.user)
