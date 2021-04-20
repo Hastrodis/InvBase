@@ -1,14 +1,12 @@
 from django.urls import include, path
 from rest_framework import routers
 from . import views
+from rest_framework.authtoken import views
+from .router import router
 
-router = routers.DefaultRouter()
-router.register(r'ausers', views.UserViewSet)
-router.register(r'atech', views.TechViewSet)
-router.register(r'ahist', views.HistViewSet)
-router.register(r'atype', views.TypeViewSet)
 
-urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+
+urlpatterns = [   
+    path('auth/', views.obtain_auth_token, name='api-token-auth'),
+    path('', include(router.urls))
 ]

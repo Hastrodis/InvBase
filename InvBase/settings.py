@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'InvAPI',
     'django_elasticsearch_dsl',
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,14 @@ ELASTICSEARCH_DSL_AUTO_REFRESH = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 }
 
 WSGI_APPLICATION = 'InvBase.wsgi.application'

@@ -8,13 +8,12 @@
         </head>
         <body>
             <div class="parent">
-                <div id="header">
-                    <div id="header1">
-                        <p align="right">Вы авторизовались как: <b>{{ user.get_username }}</b>
-                        <br><a href="/main">Вернуться</a>/<a href="/logout">Выход</a></p> 
-                                              
-                    </div>
-                </div>
+                <nav class="navbar navbar-dark bg-primary">
+                    <a class="navbar-brand">Navbar</a>
+                    <span class="navbar-text text-white">
+                       Вы авторизовались как: <b>{{ user.get_username }}</b> / <a href="/logout">Выход</a>
+                    </span>
+                </nav>
                 <div id="srrez">
                     {% for q in qs %}
                     <p id="sp"><a href="spis/{{ q.InvNomer }}"> {{ q.InvNomer }}</a></p>

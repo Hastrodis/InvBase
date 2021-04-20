@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from SaveBase.models import Techn, History, Type
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
+from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer, TechSerializer, HistSerializer, TypeSerializer
 
 

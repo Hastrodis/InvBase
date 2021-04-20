@@ -8,14 +8,14 @@
             <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" />      
         </head>
         <body>
-
-            <nav class="navbar navbar-dark bg-primary">
-                <span class="navbar-text">
-                    Вы авторизовались как: <b>{{ user.get_username }}</b>
-                </span>
-            </nav>
-            
             <div class="parent">
+                <nav class="navbar navbar-dark bg-primary">
+                    <a class="navbar-brand">Navbar</a>
+                    <span class="navbar-text text-white">
+                       Вы авторизовались как: <b>{{ user.get_username }}</b> / <a href="/logout">Выход</a>
+                    </span>
+                </nav>
+
                 {% if po.count > 0 %}
                 <div id="pod">
                     <p align="center">Подотченые лица</p>

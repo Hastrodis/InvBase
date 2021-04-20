@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^main/', include('SaveBase.urls')),
     url(r'^$', views.LoginFormView.as_view(template_name='index.html')),
     url(r'^logout/', views.LogoutView.as_view()),
-    path('', include(router.urls)),
+    path('api/', include('InvAPI.urls')),
 ]
