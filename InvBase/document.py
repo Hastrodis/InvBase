@@ -23,9 +23,9 @@ class TechDocument(Document):
             'raw': fields.TextField(analyzer='keyword')
         }
     )
-    IDType = fields.ObjectField(properties={
-        'TypeTech': fields.TextField(),
-    })
+    #IDType = fields.ObjectField(properties={
+    #    'TypeTech': fields.TextField(),
+    #})
 
     class Index:
         # Name of the Elasticsearch index
@@ -37,8 +37,10 @@ class TechDocument(Document):
 
     class Django:
         model = Techn # The model associated with this Document
-        related_models = [Type]
+        #related_models = [Type]
         # The fields of the model you want to be indexed in Elasticsearch
         #fields = [
         #    'Naimen',
         #]
+    def get_instances_from_related(self, related_instance):
+        return self
