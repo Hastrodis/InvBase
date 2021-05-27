@@ -6,3 +6,8 @@ router.register('user', views.UserViewSet)
 router.register('tech', views.TechViewSet)
 router.register('hist', views.HistViewSet)
 router.register('type', views.TypeViewSet)
+router.register(
+    prefix = 'search',
+    basename='search',
+    viewset=views.SearchViewSet
+)

@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from SaveBase.models import Techn, History, Type
 from rest_framework import serializers
+from InvBase.document import TechDocument
+from django_elasticsearch_dsl_drf.serializers import DocumentSerializer
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -23,3 +25,8 @@ class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Type
         fields = ['TypeTech']
+
+class SearchSerializer(DocumentSerializer):
+    class Meta:
+        document = TechDocument
+        fields = ['InvNomer', 'Naimen']
