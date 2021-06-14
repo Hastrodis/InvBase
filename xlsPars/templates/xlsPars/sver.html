@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    {% if user.is_authenticated %}
+        <head>      
+            <title>Главная</title>   
+            <link rel="stylesheet" href="{% static "css/main.css" %}" />
+            <link rel="stylesheet" href="{% static "css/bootstrap.css" %}" />      
+        </head>
+        <body>
+            <div class="parent">
+                <nav class="navbar navbar-dark bg-primary">
+                    <a class="navbar-brand">Инвентарная информация</a>
+                    <span class="navbar-text text-white">
+                       Вы авторизовались как: <b>{{ user.get_username }}</b> / <a href="/logout">Выход</a>
+                    </span>
+                </nav>
+                {% for res in result %}                       
+                    <p id="sp">{{ result.dict.keys() }}</p>
+                {% endfor %}
+                     
+                 
+                
+            </div>
+        </body>
+    {% else %}
+        <head>
+            <meta http-equiv="refresh" content="0; url=/">
+            
+        </head>
+    {% endif %}
+</html> 

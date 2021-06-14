@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SaveBase',
     'InvAPI',
+    'xlsPars',
     'django_elasticsearch_dsl',
     'rest_framework',
     'rest_framework.authtoken'

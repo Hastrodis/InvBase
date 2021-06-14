@@ -19,9 +19,7 @@ from django_elasticsearch_dsl_drf.constants import (
 )
 from django_elasticsearch_dsl_drf.filter_backends import (
     FilteringFilterBackend,
-    OrderingFilterBackend,
-    DefaultOrderingFilterBackend,
-    SearchFilterBackend,
+    CompoundSearchFilterBackend,
 )
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet): # только для чтения
@@ -50,14 +48,14 @@ class SearchViewSet(DocumentViewSet):
 
     filter_backends = [
         FilteringFilterBackend,
-        SearchFilterBackend,
+        CompoundSearchFilterBackend,
     ]
 
     # Define search fields
-    search_fields = (
-        'InvNomer',
-        'Naimen',
-    )
+    search_fields = {
+        'InvNomer': {'fuzziness': 'AUTO'},
+        'Naimen': {'fuzziness': 'AUTO'}
+    }
 
     filter_fields = {
         'InvNomer': 'InvNomer.raw',
